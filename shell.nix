@@ -6,6 +6,7 @@ pkgs.mkShell {
     qemu
     OVMF
 		gcc-arm-embedded
+		gdb
   ];
 
   shellHook = ''
