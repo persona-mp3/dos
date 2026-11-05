@@ -1,0 +1,20 @@
+[package]
+name = "dos"
+version = "0.1.0"
+edition = "2024"
+
+# stops the panic_handler error reported by rust_analyzer
+# and tells cargo not to build our binary in test and bench modes
+[[bin]]
+bench = false
+name = "dos"
+test = false
+
+[dependencies]
+bootloader = "0.9"
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"

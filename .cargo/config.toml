@@ -1,0 +1,14 @@
+[build]
+# src: https://os.phil-opp.com/minimal-rust-kernel/
+target = "x86_64-dos.json"
+
+[unstable]
+# src: https://os.phil-opp.com/minimal-rust-kernel/
+build-std = ["core", "compiler_builtins"]
+
+# src: https://os.phil-opp.com/minimal-rust-kernel/
+# contains memory related intrisincs like memset and memcmp
+build-std-features = ["compiler-builtins-mem"]
+
+# src: https://os.phil-opp.com/minimal-rust-kernel/
+json-target-spec = true
