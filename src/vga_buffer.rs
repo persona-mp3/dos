@@ -42,6 +42,7 @@ pub enum Color {
 }
 
 // https://doc.rust-lang.org/nomicon/other-reprs.html#reprtransparent
+/// A combination of a foreground and a background color.
 #[derive(Debug, Clone, Copy, Eq, PartialEq)]
 #[repr(transparent)]
 struct ColorCode(u8);
@@ -75,6 +76,10 @@ pub struct Writer {
     buffer: &'static mut Buffer,
 }
 
+/// A writer type that allows writing ASCII bytes and strings to an underlying `Buffer`.
+///
+/// Wraps lines at `BUFFER_WIDTH`. Supports newline characters and implements the
+/// `core::fmt::Write` trait.
 impl Writer {
     pub fn write_byte(&mut self, byte: u8) {
         match byte {
@@ -82,12 +87,9 @@ impl Writer {
             byte => {
                 // first check if we've exhausted the current row
                 if self.column_position >= BUFFER_WIDTH {
-                    // move to next row
                     self.new_line();
                 }
 
-                // TODO: don't know if this is actually correct? if we're on the
-                // 3rd row, 25 - 1 is not correct
                 let row = BUFFER_HEIGHT - 1;
                 let col = self.column_position;
 
